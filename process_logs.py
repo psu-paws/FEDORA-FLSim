@@ -91,10 +91,10 @@ def main():
         
         print(auc, total_reads, wasted_reads, lost_reads, total_samples, lost_samples)
         
-        if mode == "pub" or eps==float("inf"):
+        if mode == "pub":
             reduced_accesses = None
-            lost_read_percent = 0.0
-            dummy_reads_percent = 0.0
+            lost_read_percent = None
+            dummy_reads_percent = None
         else:
             reduced_accesses = (1 - total_reads / total_samples) * 100
             lost_read_percent = lost_reads / total_reads * 100
@@ -126,8 +126,8 @@ def main():
             mode, dataset, 
             f"{eps}" if eps is not None else "-", 
             f"{reduced_accesses:.2f}%" if reduced_accesses is not None else "-", 
-            f"{dummy_reads_percent:.2f}%", 
-            f"{lost_read_percent:.2f}%", 
+            f"{dummy_reads_percent:.2f}%" if dummy_reads_percent is not None else "-", 
+            f"{lost_read_percent:.2f}%" if lost_read_percent is not None else "-", 
             f"{auc:.4f}"
             ))) + "\n")
         
